@@ -199,7 +199,7 @@ const AdForm = ({ onSubmit }: { onSubmit: (data: FormData) => void }) => {
           Limpar
         </Button>
         <Button variant="contained" color="primary" type="submit">
-          Salvar
+          Confirmar
         </Button>
       </Box>
     </Box>
