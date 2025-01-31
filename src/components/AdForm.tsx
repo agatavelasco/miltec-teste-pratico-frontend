@@ -23,12 +23,21 @@ const schema = yup
   .object({
     nome: yup
       .string()
-      .required("O nome do anúncio deve ter pelo menos 5 caracteres."),
+      .min(5, "O nome do anúncio deve ter pelo menos 5 caracteres.")
+      .max(100, "O nome do anúncio pode ter no máximo 100 caracteres.")
+      .required("O nome do anúncio é obrigatório."),
     data: yup
+      .date()
+      .min(
+        new Date(),
+        "A data de publicação não pode ser anterior à data de hoje."
+      )
+      .required("A data de publicação é obrigatória."),
+    valor: yup
       .number()
-      .positive("O valor deve ser positivo")
-      .required("O valor é obrigatório"),
-    valor: yup.string().required("O valor deve ser maior ou igual a R$ 1,00."),
+      .typeError("O valor deve ser um número válido.")
+      .min(1, "O valor deve ser maior ou igual a R$ 1,00.")
+      .required("O valor é obrigatório."),
     cidade: yup.string().required("Selecione uma cidade válida."), // Mensagem personalizada
     tipo: yup
       .string()
