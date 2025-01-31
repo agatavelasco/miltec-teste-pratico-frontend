@@ -5,21 +5,21 @@ Este é o frontend da aplicação de anúncios desenvolvida para o teste prátic
 
 📌 Tecnologias Utilizadas
 
-React - Biblioteca para construção da interface do usuário.
+- React - Biblioteca para construção da interface do usuário.
 
-Vite - Ferramenta de build para projetos React.
+- Vite - Ferramenta de build para projetos React.
 
-TypeScript - Tipagem estática para melhor manutenção do código.
+- TypeScript - Tipagem estática para melhor manutenção do código.
 
-Material UI - Biblioteca de componentes para estilização.
+- Material UI - Biblioteca de componentes para estilização.
 
-React Hook Form - Gerenciamento de formulários.
+- React Hook Form - Gerenciamento de formulários.
 
-Yup - Validação de dados nos formulários.
+- Yup - Validação de dados nos formulários.
 
-React Router Dom - Gerenciamento de rotas.
+- React Router Dom - Gerenciamento de rotas.
 
-Axios - Requisições HTTP para a API.
+- Axios - Requisições HTTP para a API.
 
 🚀 Como Rodar o Projeto
 
