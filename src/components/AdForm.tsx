@@ -17,7 +17,6 @@ import {
   RadioGroup,
   Radio,
 } from "@mui/material";
-import { useState } from "react";
 
 const schema = yup
   .object({
@@ -38,11 +37,11 @@ const schema = yup
       .typeError("O valor deve ser um número válido.")
       .min(1, "O valor deve ser maior ou igual a R$ 1,00.")
       .required("O valor é obrigatório."),
-    cidade: yup.string().required("Selecione uma cidade válida."), // Mensagem personalizada
-    tipo: yup
-      .string()
-      .oneOf(["produto", "servico"], "Escolha um tipo válido")
-      .required("O tipo é obrigatório"),
+    cidade: yup.string().required("Selecione uma cidade válida."),
+    categoria: yup.string().required("Selecione uma categoria válida."),
+    modelo: yup.string().required("Selecione um modelo válido."),
+    condicao: yup.string().required("Selecione uma condição válida."),
+
     quantidade: yup
       .number()
       .positive("A quantidade deve ser positiva")
@@ -52,7 +51,17 @@ const schema = yup
 
 type FormData = yup.InferType<typeof schema>;
 
-const AdForm = ({ onSubmit }: { onSubmit: (data: FormData) => void }) => {
+interface AdFormProps {
+  onSubmit: (data: FormData) => void;
+  tipoAnuncio: string;
+  handleTipoAnuncioChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const AdForm: React.FC<AdFormProps> = ({
+  onSubmit,
+  tipoAnuncio,
+  handleTipoAnuncioChange,
+}) => {
   const {
     register,
     handleSubmit,
@@ -60,16 +69,6 @@ const AdForm = ({ onSubmit }: { onSubmit: (data: FormData) => void }) => {
   } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
-
-  const [tipoAnuncio, setTipoAnuncio] = useState<"produto" | "servico">(
-    "produto"
-  );
-
-  const handleTipoAnuncioChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setTipoAnuncio(event.target.value as "produto" | "servico");
-  };
 
   return (
     <Box
@@ -81,7 +80,7 @@ const AdForm = ({ onSubmit }: { onSubmit: (data: FormData) => void }) => {
         gap: 2,
 
         justifyContent: "center",
-        alignItems: "left", // Centraliza horizontalmente
+        alignItems: "left",
       }}
     >
       <FormGroup>
@@ -95,12 +94,12 @@ const AdForm = ({ onSubmit }: { onSubmit: (data: FormData) => void }) => {
           onChange={handleTipoAnuncioChange}
         >
           <FormControlLabel
-            value="produto"
+            value="Produto"
             control={<Radio />}
             label="Produto"
           />
           <FormControlLabel
-            value="servico"
+            value="Servico"
             control={<Radio />}
             label="Serviço"
           />
@@ -154,16 +153,16 @@ const AdForm = ({ onSubmit }: { onSubmit: (data: FormData) => void }) => {
           error={!!errors.cidade}
           size="small"
         >
-          <MenuItem value={10}>São Paulo</MenuItem>
-          <MenuItem value={20}>Rio de Janeiro</MenuItem>
-          <MenuItem value={30}>Belo Horizonte</MenuItem>
+          <MenuItem value={"São Paulo"}>São Paulo</MenuItem>
+          <MenuItem value={"Rio de Janeiro"}>Rio de Janeiro</MenuItem>
+          <MenuItem value={"Belo Horizonte"}>Belo Horizonte</MenuItem>
         </Select>
         {errors.cidade && (
           <FormHelperText>{errors.cidade.message}</FormHelperText>
         )}
       </FormControl>
 
-      {tipoAnuncio === "produto" && (
+      {tipoAnuncio === "Produto" && (
         <Box
           sx={{
             display: "flex",
@@ -178,50 +177,56 @@ const AdForm = ({ onSubmit }: { onSubmit: (data: FormData) => void }) => {
           <TextField
             select
             label="Categoria"
-            {...register("tipo")}
-            error={!!errors.tipo}
-            helperText={errors.tipo?.message}
+            {...register("categoria")}
+            error={!!errors.categoria}
+            helperText={errors.categoria?.message}
             size="small"
             sx={{
               gap: 2,
               width: "100%",
             }}
           >
-            <MenuItem value="produto">Produto</MenuItem>
-            <MenuItem value="servico">Serviço</MenuItem>
+            <MenuItem value="Produto">Produto</MenuItem>
+            <MenuItem value="Servico">Serviço</MenuItem>
           </TextField>
 
           <TextField
             select
             label="Modelo"
-            {...register("tipo")}
-            error={!!errors.tipo}
-            helperText={errors.tipo?.message}
+            {...register("modelo")}
+            error={!!errors.modelo}
+            helperText={errors.modelo?.message}
             size="small"
             sx={{
               gap: 2,
               width: "100%",
             }}
           >
-            <MenuItem value="smarttv">Smart TV UltraView 4K 55</MenuItem>
-            <MenuItem value="jaqueta">Jaqueta Puffer Windproof</MenuItem>
-            <MenuItem value="mesa">Mesa de Jantar Madeira </MenuItem>
+            <MenuItem value="Smart TV UltraView 4K 55">
+              Smart TV UltraView 4K 55
+            </MenuItem>
+            <MenuItem value="Jaqueta Puffer Windproof">
+              Jaqueta Puffer Windproof
+            </MenuItem>
+            <MenuItem value="Mesa de Jantar Madeira">
+              Mesa de Jantar Madeira
+            </MenuItem>
           </TextField>
 
           <TextField
             select
             label="Condição"
-            {...register("tipo")}
-            error={!!errors.tipo}
-            helperText={errors.tipo?.message}
+            {...register("condicao")}
+            error={!!errors.condicao}
+            helperText={errors.condicao?.message}
             size="small"
             sx={{
               gap: 2,
               width: "100%",
             }}
           >
-            <MenuItem value="produto">Produto</MenuItem>
-            <MenuItem value="servico">Serviço</MenuItem>
+            <MenuItem value="Produto">Produto</MenuItem>
+            <MenuItem value="Servico">Serviço</MenuItem>
           </TextField>
 
           <TextField
