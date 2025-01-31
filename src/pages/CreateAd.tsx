@@ -5,6 +5,7 @@ import { Container } from "@mui/material";
 
 const CreateAd = () => {
   const handleFormSubmit = async (data: any) => {
+    console.log(data);
     try {
       const response = await api.post("/anuncios", data);
       console.log("Anúncio cadastrado:", response.data);
@@ -28,15 +29,14 @@ const CreateAd = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
           padding: 3,
           boxShadow: 3,
           borderRadius: 2,
+          width: "50%",
         }}
       >
-        <Typography variant="h4" sx={{ mb: 2 }}>
-          Cadastrar Anúncio
+        <Typography variant="h5" sx={{ mb: 2 }}>
+          Inclusão de Anúncio
         </Typography>
         <AdForm onSubmit={handleFormSubmit} />
       </Box>

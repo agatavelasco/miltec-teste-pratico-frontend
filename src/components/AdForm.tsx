@@ -203,8 +203,9 @@ const AdForm = ({ onSubmit }: { onSubmit: (data: FormData) => void }) => {
               width: "100%",
             }}
           >
-            <MenuItem value="produto">Produto</MenuItem>
-            <MenuItem value="servico">Serviço</MenuItem>
+            <MenuItem value="smarttv">Smart TV UltraView 4K 55</MenuItem>
+            <MenuItem value="jaqueta">Jaqueta Puffer Windproof</MenuItem>
+            <MenuItem value="mesa">Mesa de Jantar Madeira </MenuItem>
           </TextField>
 
           <TextField
