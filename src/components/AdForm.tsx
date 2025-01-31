@@ -65,10 +65,24 @@ const AdForm: React.FC<AdFormProps> = ({
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
+
+  const handleReset = () => {
+    reset({
+      nome: "",
+      data: "",
+      valor: "",
+      cidade: "",
+      categoria: "",
+      modelo: "",
+      condicao: "",
+      quantidade: "",
+    });
+  };
 
   return (
     <Box
@@ -152,6 +166,7 @@ const AdForm: React.FC<AdFormProps> = ({
           {...register("cidade")}
           error={!!errors.cidade}
           size="small"
+          defaultValue=""
         >
           <MenuItem value={"São Paulo"}>São Paulo</MenuItem>
           <MenuItem value={"Rio de Janeiro"}>Rio de Janeiro</MenuItem>
@@ -182,12 +197,13 @@ const AdForm: React.FC<AdFormProps> = ({
             helperText={errors.categoria?.message}
             size="small"
             sx={{
-              gap: 2,
               width: "100%",
             }}
+            defaultValue=""
           >
-            <MenuItem value="Produto">Produto</MenuItem>
-            <MenuItem value="Servico">Serviço</MenuItem>
+            <MenuItem value="Eletrônicos">Eletrônicos</MenuItem>
+            <MenuItem value="Vestuário">Vestuário</MenuItem>
+            <MenuItem value="Móveis">Móveis</MenuItem>
           </TextField>
 
           <TextField
@@ -198,9 +214,9 @@ const AdForm: React.FC<AdFormProps> = ({
             helperText={errors.modelo?.message}
             size="small"
             sx={{
-              gap: 2,
               width: "100%",
             }}
+            defaultValue=""
           >
             <MenuItem value="Smart TV UltraView 4K 55">
               Smart TV UltraView 4K 55
@@ -221,12 +237,13 @@ const AdForm: React.FC<AdFormProps> = ({
             helperText={errors.condicao?.message}
             size="small"
             sx={{
-              gap: 2,
               width: "100%",
             }}
+            defaultValue=""
           >
-            <MenuItem value="Produto">Produto</MenuItem>
-            <MenuItem value="Servico">Serviço</MenuItem>
+            <MenuItem value="Novo">Novo</MenuItem>
+            <MenuItem value="Usado">Usado</MenuItem>
+            <MenuItem value="Seminovo">Seminovo</MenuItem>
           </TextField>
 
           <TextField
@@ -237,7 +254,6 @@ const AdForm: React.FC<AdFormProps> = ({
             helperText={errors.quantidade?.message}
             size="small"
             sx={{
-              gap: 2,
               width: "100%",
             }}
           />
@@ -253,7 +269,12 @@ const AdForm: React.FC<AdFormProps> = ({
           justifyContent: "flex-end",
         }}
       >
-        <Button variant="contained" color="inherit" type="reset">
+        <Button
+          variant="contained"
+          color="inherit"
+          type="reset"
+          onClick={handleReset}
+        >
           Limpar
         </Button>
         <Button variant="contained" color="primary" type="submit">
