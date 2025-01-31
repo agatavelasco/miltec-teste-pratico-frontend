@@ -17,6 +17,7 @@ import {
   RadioGroup,
   Radio,
 } from "@mui/material";
+import { useState } from "react";
 
 const schema = yup
   .object({
@@ -51,6 +52,16 @@ const AdForm = ({ onSubmit }: { onSubmit: (data: FormData) => void }) => {
     resolver: yupResolver(schema),
   });
 
+  const [tipoAnuncio, setTipoAnuncio] = useState<"produto" | "servico">(
+    "produto"
+  );
+
+  const handleTipoAnuncioChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setTipoAnuncio(event.target.value as "produto" | "servico");
+  };
+
   return (
     <Box
       component="form"
@@ -60,7 +71,10 @@ const AdForm = ({ onSubmit }: { onSubmit: (data: FormData) => void }) => {
         flexDirection: "column",
         gap: 2,
         maxWidth: 450,
-        alignItems: "left",
+        justifyContent: "center",
+        alignItems: "left", // Centraliza horizontalmente
+        height: "100%", // Ocupa 100% da altura da tela
+        margin: "0 auto", // Centraliza horizontalmente
       }}
     >
       <FormGroup>
@@ -71,6 +85,8 @@ const AdForm = ({ onSubmit }: { onSubmit: (data: FormData) => void }) => {
           row
           aria-labelledby="demo-row-radio-buttons-group-label"
           name="row-radio-buttons-group"
+          value={tipoAnuncio}
+          onChange={handleTipoAnuncioChange}
         >
           <FormControlLabel
             value="produto"
@@ -141,50 +157,65 @@ const AdForm = ({ onSubmit }: { onSubmit: (data: FormData) => void }) => {
         )}
       </FormControl>
 
-      <TextField
-        select
-        label="Categoria"
-        {...register("tipo")}
-        error={!!errors.tipo}
-        helperText={errors.tipo?.message}
-        size="small"
-      >
-        <MenuItem value="produto">Produto</MenuItem>
-        <MenuItem value="servico">Serviço</MenuItem>
-      </TextField>
+      {tipoAnuncio === "produto" && (
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center", // Centraliza horizontalmente
+            height: "100vh", // Ocupa 100% da altura da tela
+            margin: "0 auto", // Centraliza horizontalmente
+          }}
+        >
+          <TextField
+            select
+            label="Categoria"
+            {...register("tipo")}
+            error={!!errors.tipo}
+            helperText={errors.tipo?.message}
+            size="small"
+          >
+            <MenuItem value="produto">Produto</MenuItem>
+            <MenuItem value="servico">Serviço</MenuItem>
+          </TextField>
 
-      <TextField
-        select
-        label="Modelo"
-        {...register("tipo")}
-        error={!!errors.tipo}
-        helperText={errors.tipo?.message}
-        size="small"
-      >
-        <MenuItem value="produto">Produto</MenuItem>
-        <MenuItem value="servico">Serviço</MenuItem>
-      </TextField>
+          <TextField
+            select
+            label="Modelo"
+            {...register("tipo")}
+            error={!!errors.tipo}
+            helperText={errors.tipo?.message}
+            size="small"
+          >
+            <MenuItem value="produto">Produto</MenuItem>
+            <MenuItem value="servico">Serviço</MenuItem>
+          </TextField>
 
-      <TextField
-        select
-        label="Condição"
-        {...register("tipo")}
-        error={!!errors.tipo}
-        helperText={errors.tipo?.message}
-        size="small"
-      >
-        <MenuItem value="produto">Produto</MenuItem>
-        <MenuItem value="servico">Serviço</MenuItem>
-      </TextField>
+          <TextField
+            select
+            label="Condição"
+            {...register("tipo")}
+            error={!!errors.tipo}
+            helperText={errors.tipo?.message}
+            size="small"
+          >
+            <MenuItem value="produto">Produto</MenuItem>
+            <MenuItem value="servico">Serviço</MenuItem>
+          </TextField>
 
-      <TextField
-        label="Quantidade"
-        type="number"
-        {...register("quantidade")}
-        error={!!errors.quantidade}
-        helperText={errors.quantidade?.message}
-        size="small"
-      />
+          <TextField
+            label="Quantidade"
+            type="number"
+            {...register("quantidade")}
+            error={!!errors.quantidade}
+            helperText={errors.quantidade?.message}
+            size="small"
+          />
+        </Box>
+      )}
 
       <Box
         sx={{
@@ -192,7 +223,7 @@ const AdForm = ({ onSubmit }: { onSubmit: (data: FormData) => void }) => {
           flexDirection: "row",
           gap: 2,
           maxWidth: 450,
-          alignItems: "flex-end",
+          justifyContent: "flex-end", // Alinha os botões à direita
         }}
       >
         <Button variant="contained" color="inherit" type="reset">
