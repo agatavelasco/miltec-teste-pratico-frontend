@@ -1,50 +1,53 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+👉 Miltec Frontend
 
-Currently, two official plugins are available:
+Este é o frontend da aplicação de anúncios desenvolvida para o teste prático da Miltec. O projeto foi criado utilizando React e segue as melhores práticas para estruturação e desenvolvimento.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+📌 Tecnologias Utilizadas
 
-## Expanding the ESLint configuration
+React - Biblioteca para construção da interface do usuário.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Vite - Ferramenta de build para projetos React.
 
-- Configure the top-level `parserOptions` property like this:
+TypeScript - Tipagem estática para melhor manutenção do código.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+Material UI - Biblioteca de componentes para estilização.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+React Hook Form - Gerenciamento de formulários.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Yup - Validação de dados nos formulários.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+React Router Dom - Gerenciamento de rotas.
+
+Axios - Requisições HTTP para a API.
+
+🚀 Como Rodar o Projeto
+
+1️⃣ Clonando o Repositório
+
+Para obter o código-fonte do projeto, execute o seguinte comando no terminal:
+
+git clone https://github.com/seu-usuario/miltec-frontend.git
+cd miltec-frontend
+
+2️⃣ Instalando as Dependências
+
+Antes de rodar o projeto, instale as dependências:
+
+yarn install
+
+3️⃣ Configurando as Variáveis de Ambiente
+
+Crie um arquivo .env na raiz do projeto e defina a URL da API:
+
+VITE_API_URL=http://localhost:5000/api
+
+4️⃣ Rodando o Projeto
+
+Inicie o servidor de desenvolvimento:
+
+yarn dev
+
+O frontend estará disponível em http://localhost:5173.
+
+
