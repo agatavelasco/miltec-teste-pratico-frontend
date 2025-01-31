@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import {
@@ -66,6 +66,7 @@ const AdForm: React.FC<AdFormProps> = ({
     register,
     handleSubmit,
     reset,
+    control,
     formState: { errors },
   } = useForm<FormData>({
     resolver: yupResolver(schema),
@@ -74,13 +75,13 @@ const AdForm: React.FC<AdFormProps> = ({
   const handleReset = () => {
     reset({
       nome: "",
-      data: "",
-      valor: "",
+      data: new Date(),
+      valor: 0,
       cidade: "",
       categoria: "",
       modelo: "",
       condicao: "",
-      quantidade: "",
+      quantidade: 0,
     });
   };
 
@@ -92,7 +93,6 @@ const AdForm: React.FC<AdFormProps> = ({
         display: "flex",
         flexDirection: "column",
         gap: 2,
-
         justifyContent: "center",
         alignItems: "left",
       }}
@@ -160,18 +160,23 @@ const AdForm: React.FC<AdFormProps> = ({
 
       <FormControl error={!!errors.cidade}>
         <InputLabel id="cidade-label">Cidade</InputLabel>
-        <Select
-          labelId="cidade-label"
-          label="Cidade"
-          {...register("cidade")}
-          error={!!errors.cidade}
-          size="small"
+        <Controller
+          name="cidade"
+          control={control}
           defaultValue=""
-        >
-          <MenuItem value={"São Paulo"}>São Paulo</MenuItem>
-          <MenuItem value={"Rio de Janeiro"}>Rio de Janeiro</MenuItem>
-          <MenuItem value={"Belo Horizonte"}>Belo Horizonte</MenuItem>
-        </Select>
+          render={({ field }) => (
+            <Select
+              {...field}
+              labelId="cidade-label"
+              label="Cidade"
+              size="small"
+            >
+              <MenuItem value="São Paulo">São Paulo</MenuItem>
+              <MenuItem value="Rio de Janeiro">Rio de Janeiro</MenuItem>
+              <MenuItem value="Belo Horizonte">Belo Horizonte</MenuItem>
+            </Select>
+          )}
+        />
         {errors.cidade && (
           <FormHelperText>{errors.cidade.message}</FormHelperText>
         )}
@@ -189,62 +194,91 @@ const AdForm: React.FC<AdFormProps> = ({
             margin: "0 auto",
           }}
         >
-          <TextField
-            select
-            label="Categoria"
-            {...register("categoria")}
+          <FormControl
+            sx={{ display: "flex", width: "100%" }}
             error={!!errors.categoria}
-            helperText={errors.categoria?.message}
-            size="small"
-            sx={{
-              width: "100%",
-            }}
-            defaultValue=""
           >
-            <MenuItem value="Eletrônicos">Eletrônicos</MenuItem>
-            <MenuItem value="Vestuário">Vestuário</MenuItem>
-            <MenuItem value="Móveis">Móveis</MenuItem>
-          </TextField>
-
-          <TextField
-            select
-            label="Modelo"
-            {...register("modelo")}
+            <InputLabel id="categoria-label">Categoria</InputLabel>
+            <Controller
+              name="categoria"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <Select
+                  {...field}
+                  labelId="categoria-label"
+                  label="Categoria"
+                  size="small"
+                >
+                  <MenuItem value="Eletrônicos">Eletrônicos</MenuItem>
+                  <MenuItem value="Vestuário">Vestuário</MenuItem>
+                  <MenuItem value="Móveis">Móveis</MenuItem>
+                </Select>
+              )}
+            />
+            {errors.categoria && (
+              <FormHelperText>{errors.categoria.message}</FormHelperText>
+            )}
+          </FormControl>
+          <FormControl
+            sx={{ display: "flex", width: "100%" }}
             error={!!errors.modelo}
-            helperText={errors.modelo?.message}
-            size="small"
-            sx={{
-              width: "100%",
-            }}
-            defaultValue=""
           >
-            <MenuItem value="Smart TV UltraView 4K 55">
-              Smart TV UltraView 4K 55
-            </MenuItem>
-            <MenuItem value="Jaqueta Puffer Windproof">
-              Jaqueta Puffer Windproof
-            </MenuItem>
-            <MenuItem value="Mesa de Jantar Madeira">
-              Mesa de Jantar Madeira
-            </MenuItem>
-          </TextField>
+            <InputLabel id="modelo-label">Modelo</InputLabel>
+            <Controller
+              name="modelo"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <Select
+                  {...field}
+                  labelId="modelo-label"
+                  label="Modelo"
+                  size="small"
+                >
+                  <MenuItem value="Smart TV UltraView 4K 55">
+                    Smart TV UltraView 4K 55
+                  </MenuItem>
+                  <MenuItem value="Jaqueta Puffer Windproof">
+                    Jaqueta Puffer Windproof
+                  </MenuItem>
+                  <MenuItem value="Mesa de Jantar Madeira">
+                    Mesa de Jantar Madeira
+                  </MenuItem>
+                </Select>
+              )}
+            />
+            {errors.modelo && (
+              <FormHelperText>{errors.modelo.message}</FormHelperText>
+            )}
+          </FormControl>
 
-          <TextField
-            select
-            label="Condição"
-            {...register("condicao")}
+          <FormControl
+            sx={{ display: "flex", width: "100%" }}
             error={!!errors.condicao}
-            helperText={errors.condicao?.message}
-            size="small"
-            sx={{
-              width: "100%",
-            }}
-            defaultValue=""
           >
-            <MenuItem value="Novo">Novo</MenuItem>
-            <MenuItem value="Usado">Usado</MenuItem>
-            <MenuItem value="Seminovo">Seminovo</MenuItem>
-          </TextField>
+            <InputLabel id="condicao-label">Condição</InputLabel>
+            <Controller
+              name="condicao"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <Select
+                  {...field}
+                  labelId="condicao-label"
+                  label="Condição"
+                  size="small"
+                >
+                  <MenuItem value="Novo">Novo</MenuItem>
+                  <MenuItem value="Usado">Usado</MenuItem>
+                  <MenuItem value="Seminovo">Seminovo</MenuItem>
+                </Select>
+              )}
+            />
+            {errors.condicao && (
+              <FormHelperText>{errors.condicao.message}</FormHelperText>
+            )}
+          </FormControl>
 
           <TextField
             label="Quantidade"
@@ -265,7 +299,7 @@ const AdForm: React.FC<AdFormProps> = ({
           display: "flex",
           flexDirection: "row",
           gap: 2,
-          maxWidth: 450,
+          width: "100%",
           justifyContent: "flex-end",
         }}
       >
