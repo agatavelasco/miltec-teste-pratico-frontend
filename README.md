@@ -27,7 +27,7 @@ Axios - Requisições HTTP para a API.
 
 Para obter o código-fonte do projeto, execute o seguinte comando no terminal:
 
-git clone https://github.com/seu-usuario/miltec-frontend.git
+git clone https://github.com/agatavelasco/miltec-teste-pratico-frontend.git
 cd miltec-frontend
 
 2️⃣ Instalando as Dependências
@@ -40,7 +40,7 @@ yarn install
 
 Crie um arquivo .env na raiz do projeto e defina a URL da API:
 
-VITE_API_URL=http://localhost:5000/api
+VITE_API_URL=http://localhost:5038/
 
 4️⃣ Rodando o Projeto
 
