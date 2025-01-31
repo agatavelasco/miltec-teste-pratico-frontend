@@ -16,14 +16,23 @@ const CreateAd = () => {
   };
 
   return (
-    <Container>
+    <Container
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
       <Box
         sx={{
           display: "flex",
           flexDirection: "column",
-          width: 600,
           justifyContent: "center",
           alignItems: "center",
+          padding: 3,
+          boxShadow: 3,
+          borderRadius: 2,
         }}
       >
         <Typography variant="h4" sx={{ mb: 2 }}>

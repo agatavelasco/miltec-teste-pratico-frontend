@@ -70,11 +70,9 @@ const AdForm = ({ onSubmit }: { onSubmit: (data: FormData) => void }) => {
         display: "flex",
         flexDirection: "column",
         gap: 2,
-        maxWidth: 450,
+
         justifyContent: "center",
         alignItems: "left", // Centraliza horizontalmente
-        height: "100%", // Ocupa 100% da altura da tela
-        margin: "0 auto", // Centraliza horizontalmente
       }}
     >
       <FormGroup>
@@ -83,7 +81,6 @@ const AdForm = ({ onSubmit }: { onSubmit: (data: FormData) => void }) => {
         </FormLabel>
         <RadioGroup
           row
-          aria-labelledby="demo-row-radio-buttons-group-label"
           name="row-radio-buttons-group"
           value={tipoAnuncio}
           onChange={handleTipoAnuncioChange}
@@ -165,9 +162,8 @@ const AdForm = ({ onSubmit }: { onSubmit: (data: FormData) => void }) => {
             gap: 2,
             width: "100%",
             justifyContent: "center",
-            alignItems: "center", // Centraliza horizontalmente
-            height: "100vh", // Ocupa 100% da altura da tela
-            margin: "0 auto", // Centraliza horizontalmente
+            alignItems: "center",
+            margin: "0 auto",
           }}
         >
           <TextField
@@ -177,6 +173,10 @@ const AdForm = ({ onSubmit }: { onSubmit: (data: FormData) => void }) => {
             error={!!errors.tipo}
             helperText={errors.tipo?.message}
             size="small"
+            sx={{
+              gap: 2,
+              width: "100%",
+            }}
           >
             <MenuItem value="produto">Produto</MenuItem>
             <MenuItem value="servico">Serviço</MenuItem>
@@ -189,6 +189,10 @@ const AdForm = ({ onSubmit }: { onSubmit: (data: FormData) => void }) => {
             error={!!errors.tipo}
             helperText={errors.tipo?.message}
             size="small"
+            sx={{
+              gap: 2,
+              width: "100%",
+            }}
           >
             <MenuItem value="produto">Produto</MenuItem>
             <MenuItem value="servico">Serviço</MenuItem>
@@ -201,6 +205,10 @@ const AdForm = ({ onSubmit }: { onSubmit: (data: FormData) => void }) => {
             error={!!errors.tipo}
             helperText={errors.tipo?.message}
             size="small"
+            sx={{
+              gap: 2,
+              width: "100%",
+            }}
           >
             <MenuItem value="produto">Produto</MenuItem>
             <MenuItem value="servico">Serviço</MenuItem>
@@ -213,6 +221,10 @@ const AdForm = ({ onSubmit }: { onSubmit: (data: FormData) => void }) => {
             error={!!errors.quantidade}
             helperText={errors.quantidade?.message}
             size="small"
+            sx={{
+              gap: 2,
+              width: "100%",
+            }}
           />
         </Box>
       )}
@@ -223,7 +235,7 @@ const AdForm = ({ onSubmit }: { onSubmit: (data: FormData) => void }) => {
           flexDirection: "row",
           gap: 2,
           maxWidth: 450,
-          justifyContent: "flex-end", // Alinha os botões à direita
+          justifyContent: "flex-end",
         }}
       >
         <Button variant="contained" color="inherit" type="reset">
